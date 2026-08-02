@@ -1262,7 +1262,7 @@ local function createPlayerESP(player)
 
 		billboard.Enabled = enabled
 		highlight.Enabled = enabled and AdxSettings.pESP.Chams
-		highlight.OutlineColor.Color = AdxSettings.pESP.Color
+		highlight.OutlineColor = AdxSettings.pESP.Color
 
 		if not enabled then
 			return
