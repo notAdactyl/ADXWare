@@ -1041,6 +1041,7 @@ local AdxSettings = {
 		ShowHealth = false,
 		ShowDistance = false,
 		Chams = false,
+		Color = Color3.fromRGB(255, 255, 255),
 	},
 
 	mESP = {
@@ -1183,7 +1184,7 @@ local function createPlayerESP(player)
 	highlight.Adornee = character
 	highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
 	highlight.FillColor = Color3.fromRGB(244, 95, 115)
-	highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+	highlight.OutlineColor = AdxSettings.pESP.Color
 	highlight.FillTransparency = 0.75
 	highlight.OutlineTransparency = 0
 	highlight.Enabled = AdxSettings.pESP.Enabled
@@ -1261,6 +1262,7 @@ local function createPlayerESP(player)
 
 		billboard.Enabled = enabled
 		highlight.Enabled = enabled and AdxSettings.pESP.Chams
+		highlight.OutlineColor.Color = AdxSettings.pESP.Color
 
 		if not enabled then
 			return
@@ -1678,6 +1680,12 @@ PESPSection:toggle({name = "Show Distance", def = false, callback = function(Boo
 	refreshPlayerESP()
 end})
 
+PESPSection:colorpicker({name = "Outline Color", cpname = "", def = Color3.new(1,1,1), callback = function(color)
+	AdxSettings.pESP.Color = color
+	refreshPlayerESP()
+end})
+
+
 
 --// Mob ESP
 local MESPSection = VisualTab:section({name = "Mob ESP", side = "right", size = 200})
@@ -1707,6 +1715,12 @@ MESPSection:toggle({name = "Value", def = false, callback = function(Boolean)
 	refreshMobESP()
 end})
 
+MESPSection:colorpicker({name = "Outline Color", cpname = "", def = Color3.new(1,1,1), callback = function(color)
+	AdxSettings.mESP.OutlineColor = color
+	refreshMobESP()
+end})
+
+
 -- \\ FUNCTIONS // --
 
 function emptyfunc()
@@ -1730,4 +1744,3 @@ RunService.Heartbeat:Connect(function(delta)
 end)
 
 updatenamelist()
-
